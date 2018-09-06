@@ -77,6 +77,11 @@ public class Principal extends javax.swing.JFrame {
         btcadastrarcliente.setMaximumSize(new java.awt.Dimension(120, 57));
         btcadastrarcliente.setPreferredSize(new java.awt.Dimension(120, 57));
         btcadastrarcliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btcadastrarcliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btcadastrarclienteActionPerformed(evt);
+            }
+        });
         jToolBar2.add(btcadastrarcliente);
         jToolBar2.add(jSeparator2);
 
@@ -130,6 +135,11 @@ public class Principal extends javax.swing.JFrame {
         jmicadastrarcliente.setMnemonic('c');
         jmicadastrarcliente.setText("Cadastrar Cliente");
         jmicadastrarcliente.setToolTipText("Cadastrar Cliente");
+        jmicadastrarcliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmicadastrarclienteActionPerformed(evt);
+            }
+        });
         jmcadastro.add(jmicadastrarcliente);
 
         jmicadastraranimal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/pesquisar animais.png"))); // NOI18N
@@ -251,6 +261,14 @@ public class Principal extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_jmisairActionPerformed
+
+    private void jmicadastrarclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmicadastrarclienteActionPerformed
+        new CadastrarCliente(null, true).setVisible(true);
+    }//GEN-LAST:event_jmicadastrarclienteActionPerformed
+
+    private void btcadastrarclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btcadastrarclienteActionPerformed
+        new CadastrarCliente(null, true).setVisible(true);
+    }//GEN-LAST:event_btcadastrarclienteActionPerformed
 
     /**
      * @param args the command line arguments
