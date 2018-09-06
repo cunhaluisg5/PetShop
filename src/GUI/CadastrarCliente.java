@@ -5,7 +5,17 @@
  */
 package GUI;
 
+import dao.ClienteDao;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Enumeration;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.table.DefaultTableModel;
+import model.Categorias;
+import model.Cliente;
+import model.Endereco;
 
 /**
  *
@@ -13,9 +23,8 @@ import java.awt.Color;
  */
 public class CadastrarCliente extends javax.swing.JDialog {
 
-    /**
-     * Creates new form CadastrarCliente
-     */
+    ClienteDao dao;
+    
     public CadastrarCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -243,6 +252,11 @@ public class CadastrarCliente extends javax.swing.JDialog {
 
         cbestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SP", "RJ", "ES", "MG" }));
         cbestado.setToolTipText("Escolha uma opção");
+        cbestado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbestadoActionPerformed(evt);
+            }
+        });
 
         lbcidade.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbcidade.setText("Cidade:");
@@ -353,6 +367,11 @@ public class CadastrarCliente extends javax.swing.JDialog {
 
         btcadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
         btcadastrar.setText("Cadastrar");
+        btcadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btcadastrarActionPerformed(evt);
+            }
+        });
 
         btlimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/limpar.png"))); // NOI18N
         btlimpar.setText("Limpar");
@@ -402,9 +421,89 @@ public class CadastrarCliente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btcadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btcadastrarActionPerformed
+        try{
+            Cliente cliente = new Cliente();
+            cliente.setNome(tfnome.getText());
+            cliente.setIdade(Integer.parseInt(tfidade.getText()));
+            cliente.setSexo(cbsexo.getSelectedItem().toString());
+            cliente.setCpf(tfcpf.getText());
+            SimpleDateFormat fm = new SimpleDateFormat("dd/MM/yyyy");
+            cliente.setDataNascimento(fm.parse(tfdatanascimento.getText()));
+            radioEstadoCivil(cliente);
+            Endereco endereco = new Endereco();
+            endereco.setRua(tfrua.getText());
+            endereco.setBairro(tfbairro.getText());
+            endereco.setComplemento(tfcomplemento.getText());
+            endereco.setNumero(Integer.parseInt(tfnumero.getText()));
+            endereco.setEstado(cbestado.getSelectedItem().toString());
+            endereco.setCidade(cbcidade.getSelectedItem().toString());
+            endereco.setTelefone(tftelefone.getText());
+            endereco.setCelular(tfcelular.getText());
+            cliente.setEndereco(endereco);
+            dao = new ClienteDao();
+            dao.cadastrarCliente(cliente);
+            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar cliente!", "Atenção", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btcadastrarActionPerformed
+
+    private void cbestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbestadoActionPerformed
+        DefaultComboBoxModel combo = new DefaultComboBoxModel();
+        Categorias c1 = new Categorias();
+        Categorias c2 = new Categorias();
+        
+        switch(cbestado.getSelectedIndex()){
+            case 0:
+                c1.setId(1);
+                c1.setDescricao("São Paulo");
+                combo.addElement(c1);
+                c2.setId(2);
+                c2.setDescricao("Indaiatuba");
+                combo.addElement(c2);
+                break;
+            case 1:
+                c1.setId(1);
+                c1.setDescricao("Rio de Janeiro");
+                combo.addElement(c1);
+                c2.setId(2);
+                c2.setDescricao("Niterói");
+                combo.addElement(c2);
+                break;
+            case 2:
+                c1.setId(1);
+                c1.setDescricao("Vitória");
+                combo.addElement(c1);
+                c2.setId(2);
+                c2.setDescricao("Linhares");
+                combo.addElement(c2);
+                break;
+            case 3:
+                c1.setId(1);
+                c1.setDescricao("Juiz de Fora");
+                combo.addElement(c1);
+                c2.setId(2);
+                c2.setDescricao("Matias Barbosa");
+                combo.addElement(c2);
+                break;
+        }
+        cbcidade.setModel(combo);
+    }//GEN-LAST:event_cbestadoActionPerformed
+
+    private void radioEstadoCivil(Cliente cliente) {
+        JRadioButton radio;
+        Enumeration jr = grestadocivil.getElements();
+        while ( jr.hasMoreElements() )
+        {
+            radio = (JRadioButton) jr.nextElement();
+            if (radio.isSelected())
+            {
+                cliente.setEstadoCivil(radio.getText());
+            }
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
