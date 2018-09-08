@@ -375,6 +375,11 @@ public class CadastrarCliente extends javax.swing.JDialog {
         btlimpar.setText("Limpar");
         btlimpar.setMaximumSize(new java.awt.Dimension(117, 41));
         btlimpar.setPreferredSize(new java.awt.Dimension(117, 41));
+        btlimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btlimparActionPerformed(evt);
+            }
+        });
 
         Sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair.png"))); // NOI18N
         Sair.setText("Sair");
@@ -498,6 +503,24 @@ public class CadastrarCliente extends javax.swing.JDialog {
             this.dispose();;
         }
     }//GEN-LAST:event_SairActionPerformed
+
+    private void btlimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btlimparActionPerformed
+        tfnome.setText("");
+        tfidade.setText("");
+        cbsexo.setSelectedIndex(0);
+        tfcpf.setValue("");
+        tfdatanascimento.setValue("");
+        grestadocivil.clearSelection();
+        tfrua.setText("");
+        tfbairro.setText("");
+        tfcomplemento.setText("");
+        tfnumero.setText("");
+        cbestado.setSelectedIndex(0);
+        cbcidade.removeAllItems();
+        tftelefone.setValue("");
+        tfcelular.setValue("");
+        tfnome.requestFocus();
+    }//GEN-LAST:event_btlimparActionPerformed
 
     private void radioEstadoCivil(Cliente cliente) {
         JRadioButton radio;
