@@ -6,9 +6,11 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import jdbc.ConectionFactory;
 import model.Cliente;
 
@@ -45,6 +47,38 @@ public class ClienteDao {
             
             stmt.execute();
             stmt.close();            
+        }catch(SQLException erro){
+            throw new RuntimeException(erro);
+        }
+    }
+    
+    public List<Cliente> listarClientes(){
+        try{
+            String sql = "select * from cliente";
+            PreparedStatement stmt = conecta.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            List<Cliente> lista = new ArrayList<Cliente>();
+            
+            while(rs.next()){
+                Cliente cliente = new Cliente();
+                cliente.setId(rs.getInt("id"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setIdade(rs.getInt("idade"));
+                cliente.setSexo(rs.getString("sexo"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setDataNascimento(rs.getDate("dataNascimento"));
+                cliente.setEstadoCivil(rs.getString("estadoCivil"));
+                cliente.setRua(rs.getString("rua"));
+                cliente.setBairro(rs.getString("bairro"));
+                cliente.setComplemento(rs.getString("complemento"));
+                cliente.setNumero(rs.getInt("numero"));
+                cliente.setEstado(rs.getString("estado"));
+                cliente.setCidade(rs.getString("cidade"));
+                cliente.setTelefone(rs.getString("telefone"));
+                cliente.setCelular(rs.getString("celular"));
+                lista.add(cliente);
+            }
+            return lista;
         }catch(SQLException erro){
             throw new RuntimeException(erro);
         }
