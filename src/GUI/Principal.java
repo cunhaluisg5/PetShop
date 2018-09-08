@@ -192,6 +192,11 @@ public class Principal extends javax.swing.JFrame {
         jmipesquisarclientes.setMnemonic('c');
         jmipesquisarclientes.setText("Pesquisar Clientes");
         jmipesquisarclientes.setToolTipText("Pesquisar Clientes");
+        jmipesquisarclientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmipesquisarclientesActionPerformed(evt);
+            }
+        });
         jmpesquisa.add(jmipesquisarclientes);
 
         jmipesquisaranimais.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/cadastrar animal.png"))); // NOI18N
@@ -269,6 +274,10 @@ public class Principal extends javax.swing.JFrame {
     private void btcadastrarclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btcadastrarclienteActionPerformed
         new CadastrarCliente(null, true).setVisible(true);
     }//GEN-LAST:event_btcadastrarclienteActionPerformed
+
+    private void jmipesquisarclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmipesquisarclientesActionPerformed
+        new PesquisarClientes(null, true).setVisible(true);
+    }//GEN-LAST:event_jmipesquisarclientesActionPerformed
 
     /**
      * @param args the command line arguments

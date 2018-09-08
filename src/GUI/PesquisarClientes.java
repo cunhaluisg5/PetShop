@@ -86,6 +86,11 @@ public class PesquisarClientes extends javax.swing.JDialog {
         btsair.setText("Sair");
         btsair.setMaximumSize(new java.awt.Dimension(117, 41));
         btsair.setPreferredSize(new java.awt.Dimension(117, 41));
+        btsair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btsairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,6 +142,13 @@ public class PesquisarClientes extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Não foi possível listar os clientes!", "Atenção", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_formWindowActivated
+
+    private void btsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsairActionPerformed
+        int recebe = JOptionPane.showConfirmDialog(null, "Deseja realmente sair da tela de pesquisa?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(recebe == JOptionPane.YES_OPTION){
+            this.dispose();
+        }
+    }//GEN-LAST:event_btsairActionPerformed
 
     /**
      * @param args the command line arguments
