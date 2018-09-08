@@ -380,6 +380,11 @@ public class CadastrarCliente extends javax.swing.JDialog {
         Sair.setText("Sair");
         Sair.setMaximumSize(new java.awt.Dimension(117, 41));
         Sair.setPreferredSize(new java.awt.Dimension(117, 41));
+        Sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -486,6 +491,13 @@ public class CadastrarCliente extends javax.swing.JDialog {
         }
         cbcidade.setModel(combo);
     }//GEN-LAST:event_cbestadoActionPerformed
+
+    private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
+        int recebe = JOptionPane.showConfirmDialog(null, "Deseja sair da tela de cadastro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(recebe == JOptionPane.YES_OPTION){
+            this.dispose();;
+        }
+    }//GEN-LAST:event_SairActionPerformed
 
     private void radioEstadoCivil(Cliente cliente) {
         JRadioButton radio;
