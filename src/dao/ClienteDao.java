@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import jdbc.ConectionFactory;
 import model.Cliente;
 
 /**
@@ -17,6 +18,10 @@ import model.Cliente;
  */
 public class ClienteDao {
     Connection conecta;
+
+    public ClienteDao() {
+        this.conecta = new ConectionFactory().conecta();
+    }
     
     public void cadastrarCliente(Cliente obj){
         try{
@@ -27,16 +32,16 @@ public class ClienteDao {
             stmt.setInt(2, obj.getIdade());
             stmt.setString(3, obj.getSexo());
             stmt.setString(4, obj.getCpf());
-            stmt.setDate(5, (Date) obj.getDataNascimento());
+            stmt.setDate(5, new java.sql.Date(obj.getDataNascimento().getTime()));
             stmt.setString(6, obj.getEstadoCivil());
-            stmt.setString(7, obj.getEndereco().getRua());
-            stmt.setString(8, obj.getEndereco().getBairro());
-            stmt.setString(9, obj.getEndereco().getComplemento());
-            stmt.setInt(10, obj.getEndereco().getNumero());
-            stmt.setString(11, obj.getEndereco().getEstado());
-            stmt.setString(12, obj.getEndereco().getCidade());
-            stmt.setString(13, obj.getEndereco().getTelefone());
-            stmt.setString(14, obj.getEndereco().getCelular());
+            stmt.setString(7, obj.getRua());
+            stmt.setString(8, obj.getBairro());
+            stmt.setString(9, obj.getComplemento());
+            stmt.setInt(10, obj.getNumero());
+            stmt.setString(11, obj.getEstado());
+            stmt.setString(12, obj.getCidade());
+            stmt.setString(13, obj.getTelefone());
+            stmt.setString(14, obj.getCelular());
             
             stmt.execute();
             stmt.close();            

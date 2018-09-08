@@ -12,10 +12,8 @@ import java.util.Enumeration;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
-import javax.swing.table.DefaultTableModel;
 import model.Categorias;
 import model.Cliente;
-import model.Endereco;
 
 /**
  *
@@ -431,16 +429,14 @@ public class CadastrarCliente extends javax.swing.JDialog {
             SimpleDateFormat fm = new SimpleDateFormat("dd/MM/yyyy");
             cliente.setDataNascimento(fm.parse(tfdatanascimento.getText()));
             radioEstadoCivil(cliente);
-            Endereco endereco = new Endereco();
-            endereco.setRua(tfrua.getText());
-            endereco.setBairro(tfbairro.getText());
-            endereco.setComplemento(tfcomplemento.getText());
-            endereco.setNumero(Integer.parseInt(tfnumero.getText()));
-            endereco.setEstado(cbestado.getSelectedItem().toString());
-            endereco.setCidade(cbcidade.getSelectedItem().toString());
-            endereco.setTelefone(tftelefone.getText());
-            endereco.setCelular(tfcelular.getText());
-            cliente.setEndereco(endereco);
+            cliente.setRua(tfrua.getText());
+            cliente.setBairro(tfbairro.getText());
+            cliente.setComplemento(tfcomplemento.getText());
+            cliente.setNumero(Integer.parseInt(tfnumero.getText()));
+            cliente.setEstado(cbestado.getSelectedItem().toString());
+            cliente.setCidade(cbcidade.getSelectedItem().toString());
+            cliente.setTelefone(tftelefone.getText());
+            cliente.setCelular(tfcelular.getText());
             dao = new ClienteDao();
             dao.cadastrarCliente(cliente);
             JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
