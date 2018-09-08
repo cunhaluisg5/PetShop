@@ -5,15 +5,21 @@
  */
 package GUI;
 
+import dao.ClienteDao;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Cliente;
+
 /**
  *
  * @author Luis
  */
 public class PesquisarClientes extends javax.swing.JDialog {
 
-    /**
-     * Creates new form PesquisarClientes
-     */
+    DefaultTableModel modelo;
+    ClienteDao dao;
+    
     public PesquisarClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -37,6 +43,11 @@ public class PesquisarClientes extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisar Clientes");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         lbcabecalho.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lbcabecalho.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -46,14 +57,14 @@ public class PesquisarClientes extends javax.swing.JDialog {
 
         tbinfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Nome", "Sexo", "CPF", "idade", "Telefone"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -67,6 +78,8 @@ public class PesquisarClientes extends javax.swing.JDialog {
             tbinfo.getColumnModel().getColumn(1).setResizable(false);
             tbinfo.getColumnModel().getColumn(2).setResizable(false);
             tbinfo.getColumnModel().getColumn(3).setResizable(false);
+            tbinfo.getColumnModel().getColumn(4).setResizable(false);
+            tbinfo.getColumnModel().getColumn(5).setResizable(false);
         }
 
         btsair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair.png"))); // NOI18N
@@ -82,7 +95,7 @@ public class PesquisarClientes extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbcabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btsair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -102,6 +115,28 @@ public class PesquisarClientes extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        try{
+            dao = new ClienteDao();
+            List<Cliente> lista = dao.listarClientes();
+            modelo = (DefaultTableModel) tbinfo.getModel();
+            modelo.setNumRows(0);
+            
+            for(Cliente c : lista){
+                modelo.addRow(new Object[]{
+                c.getId(),
+                c.getNome(),
+                c.getSexo(),
+                c.getCpf(),
+                c.getCidade(),
+                c.getTelefone()
+                });
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Não foi possível listar os clientes!", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

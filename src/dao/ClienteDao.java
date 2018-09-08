@@ -6,11 +6,13 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import jdbc.ConectionFactory;
 import model.Cliente;
 
@@ -66,7 +68,7 @@ public class ClienteDao {
                 cliente.setIdade(rs.getInt("idade"));
                 cliente.setSexo(rs.getString("sexo"));
                 cliente.setCpf(rs.getString("cpf"));
-                cliente.setDataNascimento(rs.getDate("dataNascimento"));
+                //cliente.setDataNascimento(rs.getDate("dataNascimento"));
                 cliente.setEstadoCivil(rs.getString("estadoCivil"));
                 cliente.setRua(rs.getString("rua"));
                 cliente.setBairro(rs.getString("bairro"));
