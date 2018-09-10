@@ -48,7 +48,7 @@ public class CadastrarAnimal extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         taobservacao = new javax.swing.JTextArea();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbsexo = new javax.swing.JComboBox<>();
         btcadastrar = new javax.swing.JButton();
         btlimpar = new javax.swing.JButton();
         btsair = new javax.swing.JButton();
@@ -95,7 +95,7 @@ public class CadastrarAnimal extends javax.swing.JDialog {
         taobservacao.setRows(5);
         jScrollPane1.setViewportView(taobservacao);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Macho", "Fêmea" }));
+        cbsexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Macho", "Fêmea" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,7 +112,7 @@ public class CadastrarAnimal extends javax.swing.JDialog {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbidade)
                                     .addComponent(tfidade, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbsexo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -165,7 +165,7 @@ public class CadastrarAnimal extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfdataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfpelagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbsexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -182,6 +182,11 @@ public class CadastrarAnimal extends javax.swing.JDialog {
         btlimpar.setText("Limpar");
         btlimpar.setMaximumSize(new java.awt.Dimension(117, 41));
         btlimpar.setPreferredSize(new java.awt.Dimension(117, 41));
+        btlimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btlimparActionPerformed(evt);
+            }
+        });
 
         btsair.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btsair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair.png"))); // NOI18N
@@ -235,6 +240,18 @@ public class CadastrarAnimal extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btsairActionPerformed
 
+    private void btlimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btlimparActionPerformed
+        tfnome.setText("");
+        tfidade.setText("");
+        tfespecie.setText("");
+        tfraca.setText("");
+        cbsexo.setSelectedIndex(0);
+        tfdataNascimento.setValue("");
+        tfpelagem.setText("");
+        taobservacao.setText("");
+        tfnome.requestFocus();
+    }//GEN-LAST:event_btlimparActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -281,7 +298,7 @@ public class CadastrarAnimal extends javax.swing.JDialog {
     private javax.swing.JButton btcadastrar;
     private javax.swing.JButton btlimpar;
     private javax.swing.JButton btsair;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbsexo;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
