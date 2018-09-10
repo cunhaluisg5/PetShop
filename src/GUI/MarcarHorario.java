@@ -7,6 +7,8 @@ package GUI;
 
 import dao.AnimalDao;
 import dao.ClienteDao;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -59,6 +61,11 @@ public class MarcarHorario extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Marcar Horário");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         lbcabecalho.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lbcabecalho.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -325,6 +332,14 @@ public class MarcarHorario extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar cliente!", "Atenção", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btbuscarActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        Date dataAtual = new Date();
+        SimpleDateFormat fmd = new SimpleDateFormat("dd/MM/yyyy");
+        tfdia.setText(fmd.format(dataAtual));
+        SimpleDateFormat fmh = new SimpleDateFormat("HH:mm");
+        tfhorario.setText(fmh.format(dataAtual));
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
