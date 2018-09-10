@@ -7,6 +7,7 @@ package GUI;
 
 import dao.AnimalDao;
 import dao.ClienteDao;
+import dao.HorarioDao;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Animal;
 import model.Cliente;
+import model.Horario;
 
 /**
  *
@@ -61,6 +63,7 @@ public class MarcarHorario extends javax.swing.JDialog {
         tbinfo = new javax.swing.JTable();
         btlimpar = new javax.swing.JButton();
         btsair = new javax.swing.JButton();
+        btfinalizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Marcar Horário");
@@ -270,6 +273,16 @@ public class MarcarHorario extends javax.swing.JDialog {
             }
         });
 
+        btfinalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
+        btfinalizar.setText("Finalizar");
+        btfinalizar.setMaximumSize(new java.awt.Dimension(117, 41));
+        btfinalizar.setPreferredSize(new java.awt.Dimension(117, 41));
+        btfinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btfinalizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -277,7 +290,9 @@ public class MarcarHorario extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btfinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(102, 102, 102)
                         .addComponent(btlimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btsair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -298,7 +313,8 @@ public class MarcarHorario extends javax.swing.JDialog {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btlimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btsair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btsair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btfinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -377,6 +393,22 @@ public class MarcarHorario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbanimalMouseClicked
 
+    private void btfinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btfinalizarActionPerformed
+        try{
+            Horario horario = new Horario();
+            HorarioDao daoHorario = new HorarioDao();
+            horario.setCliente(cliente);
+            horario.setAnimal(animal);
+            SimpleDateFormat fmd = new SimpleDateFormat("dd/MM/yyyy");
+            horario.setData(fmd.parse(tfdia.getText()));
+            
+            daoHorario.incluirHorario(horario);
+            JOptionPane.showMessageDialog(null, "Marcação registrada com sucesso!", "Finalizado", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao finalizar!", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btfinalizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -422,6 +454,7 @@ public class MarcarHorario extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btadicionar;
     private javax.swing.JButton btbuscar;
+    private javax.swing.JButton btfinalizar;
     private javax.swing.JButton btlimpar;
     private javax.swing.JButton btsair;
     private javax.swing.JPanel jPanel1;

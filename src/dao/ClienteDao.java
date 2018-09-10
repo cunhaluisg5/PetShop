@@ -21,7 +21,7 @@ import model.Cliente;
  * @author Luis
  */
 public class ClienteDao {
-    Connection conecta;
+    private Connection conecta;
 
     public ClienteDao() {
         this.conecta = new ConectionFactory().conecta();

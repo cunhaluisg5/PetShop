@@ -19,7 +19,7 @@ import model.Animal;
  * @author Luis
  */
 public class AnimalDao {
-    Connection conecta;
+    private Connection conecta;
     
     public AnimalDao() {
         this.conecta = new ConectionFactory().conecta();

@@ -12,17 +12,29 @@ import java.util.Date;
  * @author Luis
  */
 public class Horario {
+    private int id;
     private Animal animal;
     private Cliente cliente;
     private Date data;
+    private Date horario;
 
     public Horario() {
     }
 
-    public Horario(Animal animal, Cliente cliente, Date data) {
+    public Horario(int id, Animal animal, Cliente cliente, Date data, Date horario) {
+        this.id = id;
         this.animal = animal;
         this.cliente = cliente;
         this.data = data;
+        this.horario = horario;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Animal getAnimal() {
@@ -49,8 +61,16 @@ public class Horario {
         this.data = data;
     }
 
+    public Date getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Date horario) {
+        this.horario = horario;
+    }
+
     @Override
     public String toString() {
-        return "Horario{" + "animal=" + animal + ", cliente=" + cliente + ", data=" + data + '}';
+        return "Horario{" + "id=" + id + ", animal=" + animal + ", cliente=" + cliente + ", data=" + data + ", horario=" + horario + '}';
     }
 }
