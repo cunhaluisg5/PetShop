@@ -6,10 +6,12 @@
 package GUI;
 
 import dao.AnimalDao;
+import dao.ClienteDao;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Animal;
+import model.Cliente;
 
 /**
  *
@@ -59,14 +61,14 @@ public class PesquisarAnimais extends javax.swing.JDialog {
 
         tbinfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Idade", "Espécie", "Raça", "Sexo"
+                "Nome", "Idade", "Espécie", "Raça", "Sexo", "Proprietário"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -81,6 +83,7 @@ public class PesquisarAnimais extends javax.swing.JDialog {
             tbinfo.getColumnModel().getColumn(2).setResizable(false);
             tbinfo.getColumnModel().getColumn(3).setResizable(false);
             tbinfo.getColumnModel().getColumn(4).setResizable(false);
+            tbinfo.getColumnModel().getColumn(5).setResizable(false);
         }
 
         btsair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair.png"))); // NOI18N
@@ -100,15 +103,14 @@ public class PesquisarAnimais extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbcabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(lbcabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btsair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(18, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,14 +140,24 @@ public class PesquisarAnimais extends javax.swing.JDialog {
             List<Animal> lista = dao.listarAnimais();
             model = (DefaultTableModel) tbinfo.getModel();
             model.setNumRows(0);
+            ClienteDao daoCliente = new ClienteDao();
+            
+            List<Cliente> cliente = daoCliente.listarClientes();
             
             for(Animal a : lista){
+                String cpf = "Sem proprietário";
+                for(Cliente c : cliente){
+                    if(c.getCpf().equals(a.getCpfProprietario())){
+                        cpf = c.getNome();
+                    }
+                }
                 model.addRow(new Object[]{
                 a.getNome(),
                 a.getIdade(),
                 a.getEspecie(),
                 a.getRaca(),
-                a.getSexo()
+                a.getSexo(),
+                cpf
                 });
             }
         }catch(Exception e){

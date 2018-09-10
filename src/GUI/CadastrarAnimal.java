@@ -51,6 +51,8 @@ public class CadastrarAnimal extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         taobservacao = new javax.swing.JTextArea();
         cbsexo = new javax.swing.JComboBox<>();
+        lbcpf = new javax.swing.JLabel();
+        tfcpf = new javax.swing.JFormattedTextField();
         btcadastrar = new javax.swing.JButton();
         btlimpar = new javax.swing.JButton();
         btsair = new javax.swing.JButton();
@@ -99,6 +101,15 @@ public class CadastrarAnimal extends javax.swing.JDialog {
 
         cbsexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Macho", "Fêmea" }));
 
+        lbcpf.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbcpf.setText("CPF Proprietário:");
+
+        try {
+            tfcpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -133,13 +144,15 @@ public class CadastrarAnimal extends javax.swing.JDialog {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lbpelagem)
                                             .addComponent(tfpelagem, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbcpf)
                             .addComponent(jLabel8)
                             .addComponent(lbnome)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 24, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfcpf, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,10 +182,14 @@ public class CadastrarAnimal extends javax.swing.JDialog {
                     .addComponent(tfpelagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbsexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(lbcpf)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfcpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         btcadastrar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -228,13 +245,13 @@ public class CadastrarAnimal extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btcadastrar)
                     .addComponent(btlimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btsair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -256,6 +273,7 @@ public class CadastrarAnimal extends javax.swing.JDialog {
         tfdataNascimento.setValue("");
         tfpelagem.setText("");
         taobservacao.setText("");
+        tfcpf.setValue("");
         tfnome.requestFocus();
     }//GEN-LAST:event_btlimparActionPerformed
 
@@ -271,6 +289,7 @@ public class CadastrarAnimal extends javax.swing.JDialog {
             animal.setDataNascimento(fm.parse(tfdataNascimento.getText()));
             animal.setPelagem(tfpelagem.getText());
             animal.setObservacao(taobservacao.getText());
+            animal.setCpfProprietario(tfcpf.getText());
             dao = new AnimalDao();
             dao.cadastrarAnimal(animal);
             JOptionPane.showMessageDialog(null, "Animal cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
@@ -329,6 +348,7 @@ public class CadastrarAnimal extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbcpf;
     private javax.swing.JLabel lbdataNascimento;
     private javax.swing.JLabel lbespecie;
     private javax.swing.JLabel lbidade;
@@ -337,6 +357,7 @@ public class CadastrarAnimal extends javax.swing.JDialog {
     private javax.swing.JLabel lbraca;
     private javax.swing.JLabel lbsexo;
     private javax.swing.JTextArea taobservacao;
+    private javax.swing.JFormattedTextField tfcpf;
     private javax.swing.JFormattedTextField tfdataNascimento;
     private javax.swing.JTextField tfespecie;
     private javax.swing.JTextField tfidade;

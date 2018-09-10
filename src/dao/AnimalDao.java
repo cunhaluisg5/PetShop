@@ -28,7 +28,7 @@ public class AnimalDao {
     public void cadastrarAnimal(Animal obj){
         try{
             String sql = "insert into animal(nome, idade, especie, raca, sexo, dataNascimento, pelagem, "
-            + "observacao) values(?, ?, ?, ?, ?, ?, ?, ?)";
+            + "observacao, cpfProprietario) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conecta.prepareStatement(sql);
             stmt.setString(1, obj.getNome());
             stmt.setInt(2, obj.getIdade());
@@ -38,6 +38,7 @@ public class AnimalDao {
             stmt.setDate(6, new java.sql.Date(obj.getDataNascimento().getTime()));
             stmt.setString(7, obj.getPelagem());
             stmt.setString(8, obj.getObservacao());
+            stmt.setString(9, obj.getCpfProprietario());
             
             stmt.execute();
             stmt.close();
@@ -64,6 +65,7 @@ public class AnimalDao {
                 animal.setDataNascimento(rs.getDate("dataNascimento"));
                 animal.setPelagem(rs.getString("pelagem"));
                 animal.setObservacao(rs.getString("observacao"));
+                animal.setCpfProprietario(rs.getString("cpfProprietario"));
                 lista.add(animal);
             }
             return lista;

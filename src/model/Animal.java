@@ -21,11 +21,12 @@ public class Animal {
     private Date dataNascimento;
     private String pelagem;
     private String observacao;
+    private String cpfProprietario;
 
     public Animal() {
     }
 
-    public Animal(int id, String nome, int idade, String especie, String raca, String sexo, Date dataNascimento, String pelagem, String observacao) {
+    public Animal(int id, String nome, int idade, String especie, String raca, String sexo, Date dataNascimento, String pelagem, String observacao, String cpfProprietario) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -35,6 +36,7 @@ public class Animal {
         this.dataNascimento = dataNascimento;
         this.pelagem = pelagem;
         this.observacao = observacao;
+        this.cpfProprietario = cpfProprietario;
     }
 
     public int getId() {
@@ -109,8 +111,16 @@ public class Animal {
         this.observacao = observacao;
     }
 
+    public String getCpfProprietario() {
+        return cpfProprietario;
+    }
+
+    public void setCpfProprietario(String cpfProprietario) {
+        this.cpfProprietario = cpfProprietario;
+    }
+
     @Override
     public String toString() {
-        return "Animal{" + "id=" + id + ", nome=" + nome + ", idade=" + idade + ", especie=" + especie + ", raca=" + raca + ", sexo=" + sexo + ", dataNascimento=" + dataNascimento + ", pelagem=" + pelagem + ", observacao=" + observacao + '}';
+        return "Animal{" + "id=" + id + ", nome=" + nome + ", idade=" + idade + ", especie=" + especie + ", raca=" + raca + ", sexo=" + sexo + ", dataNascimento=" + dataNascimento + ", pelagem=" + pelagem + ", observacao=" + observacao + ", cpfProprietario=" + cpfProprietario + '}';
     }
 }
