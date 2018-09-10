@@ -107,6 +107,11 @@ public class Principal extends javax.swing.JFrame {
         btmarcarhorario.setMaximumSize(new java.awt.Dimension(120, 57));
         btmarcarhorario.setPreferredSize(new java.awt.Dimension(120, 57));
         btmarcarhorario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btmarcarhorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btmarcarhorarioActionPerformed(evt);
+            }
+        });
         jToolBar2.add(btmarcarhorario);
         jToolBar2.add(jSeparator4);
 
@@ -245,7 +250,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmicadastraranimalActionPerformed
 
     private void jmimarcarhorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmimarcarhorarioActionPerformed
-        // TODO add your handling code here:
+        new MarcarHorario(null, true).setVisible(true);
     }//GEN-LAST:event_jmimarcarhorarioActionPerformed
 
     private void jmiinformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiinformacoesActionPerformed
@@ -287,6 +292,10 @@ public class Principal extends javax.swing.JFrame {
     private void jmipesquisaranimaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmipesquisaranimaisActionPerformed
         new PesquisarAnimais(null, true).setVisible(true);
     }//GEN-LAST:event_jmipesquisaranimaisActionPerformed
+
+    private void btmarcarhorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmarcarhorarioActionPerformed
+        new MarcarHorario(null, true).setVisible(true);
+    }//GEN-LAST:event_btmarcarhorarioActionPerformed
 
     /**
      * @param args the command line arguments
