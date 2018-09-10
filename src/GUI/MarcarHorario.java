@@ -261,6 +261,11 @@ public class MarcarHorario extends javax.swing.JDialog {
         btlimpar.setText("Limpar");
         btlimpar.setMaximumSize(new java.awt.Dimension(117, 41));
         btlimpar.setPreferredSize(new java.awt.Dimension(117, 41));
+        btlimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btlimparActionPerformed(evt);
+            }
+        });
 
         btsair.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btsair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair.png"))); // NOI18N
@@ -366,12 +371,16 @@ public class MarcarHorario extends javax.swing.JDialog {
     }//GEN-LAST:event_btbuscarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        preencherHorario();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void preencherHorario() {
         Date dataAtual = new Date();
         SimpleDateFormat fmd = new SimpleDateFormat("dd/MM/yyyy");
         tfdia.setText(fmd.format(dataAtual));
         SimpleDateFormat fmh = new SimpleDateFormat("HH:mm");
         tfhorario.setText(fmh.format(dataAtual));
-    }//GEN-LAST:event_formWindowActivated
+    }
 
     private void btadicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btadicionarActionPerformed
         modeloInfo = (DefaultTableModel) tbinfo.getModel();
@@ -408,6 +417,27 @@ public class MarcarHorario extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Erro ao finalizar!", "Atenção", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btfinalizarActionPerformed
+
+    private void btlimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btlimparActionPerformed
+        tfcpf.setValue("");
+        limparTabelaAnimal();
+        limparTabelaInfo();
+        preencherHorario();
+        tfcpf.requestFocus();
+        
+    }//GEN-LAST:event_btlimparActionPerformed
+
+    private void limparTabelaAnimal() {
+        for(int i = tbanimal.getRowCount()-1; i >= 0; i--){
+            modeloAnimal.removeRow(i);
+        }
+    }
+    
+    private void limparTabelaInfo() {
+        for(int i = tbinfo.getRowCount()-1; i >= 0; i--){
+            modeloInfo.removeRow(i);
+        }
+    }
 
     /**
      * @param args the command line arguments
