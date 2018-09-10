@@ -105,7 +105,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="tfhorario" min="-2" pref="66" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btfinalizar" min="-2" max="-2" attributes="0"/>
+                              <Component id="btadicionar" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane1" min="-2" pref="495" max="-2" attributes="0"/>
                       </Group>
@@ -131,7 +131,7 @@
                       <Component id="tfdia" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbhorario" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfhorario" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btfinalizar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btadicionar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -176,7 +176,8 @@
             <Component class="javax.swing.JTable" name="tbanimal">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="5" rowCount="1">
+                  <Table columnCount="6" rowCount="1">
+                    <Column editable="false" title="Id" type="java.lang.Object"/>
                     <Column editable="false" title="Nome" type="java.lang.Object"/>
                     <Column editable="false" title="Idade" type="java.lang.Object"/>
                     <Column editable="false" title="Esp&#xe9;cie" type="java.lang.Object"/>
@@ -211,12 +212,20 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                   </TableColumnModel>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbanimalMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -270,7 +279,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btfinalizar">
+        <Component class="javax.swing.JButton" name="btadicionar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="11" style="1"/>
@@ -278,7 +287,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icones/finalizar.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Finalizar"/>
+            <Property name="text" type="java.lang.String" value="Adicionar"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[117, 41]"/>
             </Property>
@@ -286,6 +295,9 @@
               <Dimension value="[117, 41]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btadicionarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -23,7 +23,11 @@ public class MarcarHorario extends javax.swing.JDialog {
 
     ClienteDao daoCliente;
     AnimalDao daoAnimal;
-    DefaultTableModel modelo;
+    DefaultTableModel modeloAnimal;
+    DefaultTableModel modeloInfo;
+    Cliente cliente;
+    Animal animal;
+    List<Animal> animais;
     
     public MarcarHorario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -51,7 +55,7 @@ public class MarcarHorario extends javax.swing.JDialog {
         tfhorario = new javax.swing.JFormattedTextField();
         lbdia = new javax.swing.JLabel();
         tfdia = new javax.swing.JFormattedTextField();
-        btfinalizar = new javax.swing.JButton();
+        btadicionar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbinfo = new javax.swing.JTable();
@@ -86,14 +90,14 @@ public class MarcarHorario extends javax.swing.JDialog {
 
         tbanimal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Idade", "Espécie", "Raça", "Sexo"
+                "Id", "Nome", "Idade", "Espécie", "Raça", "Sexo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -101,6 +105,11 @@ public class MarcarHorario extends javax.swing.JDialog {
             }
         });
         tbanimal.getTableHeader().setReorderingAllowed(false);
+        tbanimal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbanimalMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbanimal);
         if (tbanimal.getColumnModel().getColumnCount() > 0) {
             tbanimal.getColumnModel().getColumn(0).setResizable(false);
@@ -108,6 +117,7 @@ public class MarcarHorario extends javax.swing.JDialog {
             tbanimal.getColumnModel().getColumn(2).setResizable(false);
             tbanimal.getColumnModel().getColumn(3).setResizable(false);
             tbanimal.getColumnModel().getColumn(4).setResizable(false);
+            tbanimal.getColumnModel().getColumn(5).setResizable(false);
         }
 
         btbuscar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -139,11 +149,16 @@ public class MarcarHorario extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
-        btfinalizar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btfinalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/finalizar.png"))); // NOI18N
-        btfinalizar.setText("Finalizar");
-        btfinalizar.setMaximumSize(new java.awt.Dimension(117, 41));
-        btfinalizar.setPreferredSize(new java.awt.Dimension(117, 41));
+        btadicionar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btadicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/finalizar.png"))); // NOI18N
+        btadicionar.setText("Adicionar");
+        btadicionar.setMaximumSize(new java.awt.Dimension(117, 41));
+        btadicionar.setPreferredSize(new java.awt.Dimension(117, 41));
+        btadicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btadicionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -168,7 +183,7 @@ public class MarcarHorario extends javax.swing.JDialog {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(tfhorario, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btfinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btadicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -188,7 +203,7 @@ public class MarcarHorario extends javax.swing.JDialog {
                     .addComponent(tfdia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbhorario)
                     .addComponent(tfhorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btfinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btadicionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -300,7 +315,7 @@ public class MarcarHorario extends javax.swing.JDialog {
     private void btbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbuscarActionPerformed
         try{
             String cpf = tfcpf.getText();
-            Cliente cliente = new Cliente();
+            cliente = new Cliente();
             daoCliente = new ClienteDao();
             List<Cliente> clientes = daoCliente.listarClientes();
             for(Cliente c : clientes){
@@ -310,14 +325,15 @@ public class MarcarHorario extends javax.swing.JDialog {
             }
             
             daoAnimal = new AnimalDao();
-            List<Animal> animais = daoAnimal.listarAnimais();
+            animais = daoAnimal.listarAnimais();
             
-            modelo = (DefaultTableModel) tbanimal.getModel();
-            modelo.setNumRows(0);
+            modeloAnimal = (DefaultTableModel) tbanimal.getModel();
+            modeloAnimal.setNumRows(0);
             
             for(Animal a : animais){
                 if(a.getCpfProprietario().equals(cpf)){
-                    modelo.addRow(new Object[]{
+                    modeloAnimal.addRow(new Object[]{
+                    a.getId(),
                     a.getNome(),
                     a.getIdade(),
                     a.getEspecie(),
@@ -340,6 +356,26 @@ public class MarcarHorario extends javax.swing.JDialog {
         SimpleDateFormat fmh = new SimpleDateFormat("HH:mm");
         tfhorario.setText(fmh.format(dataAtual));
     }//GEN-LAST:event_formWindowActivated
+
+    private void btadicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btadicionarActionPerformed
+        modeloInfo = (DefaultTableModel) tbinfo.getModel();
+        modeloInfo.setNumRows(0);
+        modeloInfo.addRow(new Object[]{
+        cliente.getNome(),
+        animal.getNome(),
+        tfdia.getText(),
+        tfhorario.getText()
+        });
+    }//GEN-LAST:event_btadicionarActionPerformed
+
+    private void tbanimalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbanimalMouseClicked
+        for(Animal a : animais){
+            int id = (int) tbanimal.getValueAt(tbanimal.getSelectedRow(), 0);
+            if(a.getId() == id){
+                animal = a;
+            }
+        }
+    }//GEN-LAST:event_tbanimalMouseClicked
 
     /**
      * @param args the command line arguments
@@ -384,8 +420,8 @@ public class MarcarHorario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btadicionar;
     private javax.swing.JButton btbuscar;
-    private javax.swing.JButton btfinalizar;
     private javax.swing.JButton btlimpar;
     private javax.swing.JButton btsair;
     private javax.swing.JPanel jPanel1;
