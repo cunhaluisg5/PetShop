@@ -13,18 +13,18 @@ import java.util.Date;
  */
 public class Horario {
     private int id;
-    private Animal animal;
-    private Cliente cliente;
-    private Date data;
-    private Date horario;
+    private int idAnimal;
+    private int idCliente;
+    private String data;
+    private String horario;
 
     public Horario() {
     }
 
-    public Horario(int id, Animal animal, Cliente cliente, Date data, Date horario) {
+    public Horario(int id, int idAnimal, int idCliente, String data, String horario) {
         this.id = id;
-        this.animal = animal;
-        this.cliente = cliente;
+        this.idAnimal = idAnimal;
+        this.idCliente = idCliente;
         this.data = data;
         this.horario = horario;
     }
@@ -37,40 +37,40 @@ public class Horario {
         this.id = id;
     }
 
-    public Animal getAnimal() {
-        return animal;
+    public int getIdAnimal() {
+        return idAnimal;
     }
 
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
+    public void setIdAnimal(int idAnimal) {
+        this.idAnimal = idAnimal;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
-    public Date getHorario() {
+    public String getHorario() {
         return horario;
     }
 
-    public void setHorario(Date horario) {
+    public void setHorario(String horario) {
         this.horario = horario;
     }
 
     @Override
     public String toString() {
-        return "Horario{" + "id=" + id + ", animal=" + animal + ", cliente=" + cliente + ", data=" + data + ", horario=" + horario + '}';
+        return "Horario{" + "id=" + id + ", idAnimal=" + idAnimal + ", idCliente=" + idCliente + ", data=" + data + ", horario=" + horario + '}';
     }
 }

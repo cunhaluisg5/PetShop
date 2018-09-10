@@ -118,6 +118,9 @@
                 <Property name="text" type="java.lang.String" value="Pesquisar Marca&#xe7;&#xf5;es"/>
                 <Property name="toolTipText" type="java.lang.String" value="Pesquisar Marca&#xe7;&#xf5;es"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmipesquisarmarcacoesActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

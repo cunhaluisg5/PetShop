@@ -7,7 +7,10 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import jdbc.ConectionFactory;
 import model.Horario;
 
@@ -24,15 +27,38 @@ public class HorarioDao {
     
     public void incluirHorario(Horario obj){
         try{
-            String sql = "insert into horario(idCliente, idAnimal, data) values(?, ?, ?)";
+            String sql = "insert into horario(idCliente, idAnimal, data, horario) values(?, ?, ?, ?)";
             PreparedStatement stmt = conecta.prepareStatement(sql);
             
-            stmt.setInt(1, obj.getCliente().getId());
-            stmt.setInt(2, obj.getAnimal().getId());
-            stmt.setDate(3, new java.sql.Date(obj.getData().getTime()));
+            stmt.setInt(1, obj.getIdCliente());
+            stmt.setInt(2, obj.getIdAnimal());
+            stmt.setString(3, obj.getData());
+            stmt.setString(4, obj.getHorario());
             
             stmt.execute();
             stmt.close();
+        }catch(SQLException erro){
+            throw new RuntimeException(erro);
+        }
+    }
+    
+    public List<Horario> listarHorarios(){
+        try{
+            String sql = "select * from horario";
+            PreparedStatement stmt = conecta.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            List<Horario> lista = new ArrayList<Horario>();
+            
+            while(rs.next()){
+                Horario horario = new Horario();
+                horario.setId(rs.getInt("id"));
+                horario.setIdCliente(rs.getInt("idCliente"));
+                horario.setIdAnimal(rs.getInt("idAnimal"));
+                horario.setData(rs.getString("data"));
+                horario.setHorario(rs.getString("horario"));
+                lista.add(horario);
+            }
+            return lista;
         }catch(SQLException erro){
             throw new RuntimeException(erro);
         }

@@ -219,6 +219,11 @@ public class Principal extends javax.swing.JFrame {
         jmipesquisarmarcacoes.setMnemonic('m');
         jmipesquisarmarcacoes.setText("Pesquisar Marcações");
         jmipesquisarmarcacoes.setToolTipText("Pesquisar Marcações");
+        jmipesquisarmarcacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmipesquisarmarcacoesActionPerformed(evt);
+            }
+        });
         jmpesquisa.add(jmipesquisarmarcacoes);
 
         jMenuBar1.add(jmpesquisa);
@@ -296,6 +301,10 @@ public class Principal extends javax.swing.JFrame {
     private void btmarcarhorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmarcarhorarioActionPerformed
         new MarcarHorario(null, true).setVisible(true);
     }//GEN-LAST:event_btmarcarhorarioActionPerformed
+
+    private void jmipesquisarmarcacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmipesquisarmarcacoesActionPerformed
+        new PesquisarMarcacoes(null, true).setVisible(true);
+    }//GEN-LAST:event_jmipesquisarmarcacoesActionPerformed
 
     /**
      * @param args the command line arguments

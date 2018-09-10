@@ -5,7 +5,15 @@
  */
 package GUI;
 
+import dao.AnimalDao;
+import dao.ClienteDao;
+import dao.HorarioDao;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Animal;
+import model.Cliente;
+import model.Horario;
 
 /**
  *
@@ -13,9 +21,11 @@ import javax.swing.JOptionPane;
  */
 public class PesquisarMarcacoes extends javax.swing.JDialog {
 
-    /**
-     * Creates new form PesquisarMarcacoes
-     */
+    HorarioDao daoHorario;
+    ClienteDao daoCliente;
+    AnimalDao daoAnimal;
+    DefaultTableModel modelo;
+    
     public PesquisarMarcacoes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -31,22 +41,27 @@ public class PesquisarMarcacoes extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lbcabecalho = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tbinfo = new javax.swing.JTable();
+        btsair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisar Marcações");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Marcações Cadastradas");
+        lbcabecalho.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lbcabecalho.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbcabecalho.setText("Marcações Cadastradas");
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbinfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
             },
@@ -62,23 +77,23 @@ public class PesquisarMarcacoes extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        tbinfo.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tbinfo);
+        if (tbinfo.getColumnModel().getColumnCount() > 0) {
+            tbinfo.getColumnModel().getColumn(0).setResizable(false);
+            tbinfo.getColumnModel().getColumn(1).setResizable(false);
+            tbinfo.getColumnModel().getColumn(2).setResizable(false);
+            tbinfo.getColumnModel().getColumn(3).setResizable(false);
+            tbinfo.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair.png"))); // NOI18N
-        jButton1.setText("Sair");
-        jButton1.setMaximumSize(new java.awt.Dimension(117, 41));
-        jButton1.setPreferredSize(new java.awt.Dimension(117, 41));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btsair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair.png"))); // NOI18N
+        btsair.setText("Sair");
+        btsair.setMaximumSize(new java.awt.Dimension(117, 41));
+        btsair.setPreferredSize(new java.awt.Dimension(117, 41));
+        btsair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btsairActionPerformed(evt);
             }
         });
 
@@ -88,7 +103,7 @@ public class PesquisarMarcacoes extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbcabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -96,30 +111,68 @@ public class PesquisarMarcacoes extends javax.swing.JDialog {
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btsair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbcabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btsair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsairActionPerformed
         int recebe = JOptionPane.showConfirmDialog(null, "Deseja realmente sair da tela de pesquisa?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(recebe == JOptionPane.YES_OPTION){
             this.dispose();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btsairActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        try{
+            daoHorario = new HorarioDao();
+            daoCliente = new ClienteDao();
+            daoAnimal = new AnimalDao();
+            modelo = (DefaultTableModel) tbinfo.getModel();
+            modelo.setNumRows(0);
+            List<Horario> horarios = daoHorario.listarHorarios();
+            List<Cliente> clientes = daoCliente.listarClientes();
+            List<Animal> animais = daoAnimal.listarAnimais();
+            
+            for(Horario h : horarios){
+                Cliente cliente = null;
+                Animal animal = null;
+                for(Cliente c : clientes){
+                    if(h.getIdCliente() == c.getId()){
+                        cliente = c;
+                    }
+                }
+                for(Animal a : animais){
+                    if(h.getIdAnimal() == a.getId()){
+                        animal = a;
+                    }
+                }
+                modelo.addRow(new Object[]{
+                h.getId(),
+                cliente.getNome(),
+                animal.getNome(),
+                h.getData(),
+                h.getHorario()
+                });
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao listar horários!", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -164,9 +217,9 @@ public class PesquisarMarcacoes extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btsair;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lbcabecalho;
+    private javax.swing.JTable tbinfo;
     // End of variables declaration//GEN-END:variables
 }

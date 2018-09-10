@@ -406,10 +406,10 @@ public class MarcarHorario extends javax.swing.JDialog {
         try{
             Horario horario = new Horario();
             HorarioDao daoHorario = new HorarioDao();
-            horario.setCliente(cliente);
-            horario.setAnimal(animal);
-            SimpleDateFormat fmd = new SimpleDateFormat("dd/MM/yyyy");
-            horario.setData(fmd.parse(tfdia.getText()));
+            horario.setIdCliente(cliente.getId());
+            horario.setIdAnimal(animal.getId());
+            horario.setData(tfdia.getText());
+            horario.setHorario(tfhorario.getText());
             
             daoHorario.incluirHorario(horario);
             JOptionPane.showMessageDialog(null, "Marcação registrada com sucesso!", "Finalizado", JOptionPane.INFORMATION_MESSAGE);
