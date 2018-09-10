@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Luis
@@ -186,6 +188,11 @@ public class CadastrarAnimal extends javax.swing.JDialog {
         btsair.setText("Sair");
         btsair.setMaximumSize(new java.awt.Dimension(117, 41));
         btsair.setPreferredSize(new java.awt.Dimension(117, 41));
+        btsair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btsairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -220,6 +227,13 @@ public class CadastrarAnimal extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsairActionPerformed
+        int recebe = JOptionPane.showConfirmDialog(null, "Deseja realmente sair da tela de cadastro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(recebe == JOptionPane.YES_OPTION){
+            this.dispose();
+        }
+    }//GEN-LAST:event_btsairActionPerformed
 
     /**
      * @param args the command line arguments
