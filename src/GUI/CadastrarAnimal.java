@@ -5,7 +5,10 @@
  */
 package GUI;
 
+import dao.AnimalDao;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import model.Animal;
 
 /**
  *
@@ -13,9 +16,8 @@ import javax.swing.JOptionPane;
  */
 public class CadastrarAnimal extends javax.swing.JDialog {
 
-    /**
-     * Creates new form CadastrarAnimal
-     */
+    AnimalDao dao;
+    
     public CadastrarAnimal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -176,6 +178,11 @@ public class CadastrarAnimal extends javax.swing.JDialog {
         btcadastrar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btcadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
         btcadastrar.setText("Cadastrar");
+        btcadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btcadastrarActionPerformed(evt);
+            }
+        });
 
         btlimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btlimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/limpar.png"))); // NOI18N
@@ -251,6 +258,26 @@ public class CadastrarAnimal extends javax.swing.JDialog {
         taobservacao.setText("");
         tfnome.requestFocus();
     }//GEN-LAST:event_btlimparActionPerformed
+
+    private void btcadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btcadastrarActionPerformed
+        try{
+            Animal animal = new Animal();
+            animal.setNome(tfnome.getText());
+            animal.setIdade(Integer.parseInt(tfidade.getText()));
+            animal.setEspecie(tfespecie.getText());
+            animal.setRaca(tfraca.getText());
+            animal.setSexo(cbsexo.getSelectedItem().toString());
+            SimpleDateFormat fm = new SimpleDateFormat("dd/MM/yyyy");
+            animal.setDataNascimento(fm.parse(tfdataNascimento.getText()));
+            animal.setPelagem(tfpelagem.getText());
+            animal.setObservacao(taobservacao.getText());
+            dao = new AnimalDao();
+            dao.cadastrarAnimal(animal);
+            JOptionPane.showMessageDialog(null, "Animal cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar animal!", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btcadastrarActionPerformed
 
     /**
      * @param args the command line arguments
