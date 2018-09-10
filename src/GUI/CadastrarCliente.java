@@ -363,6 +363,7 @@ public class CadastrarCliente extends javax.swing.JDialog {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        btcadastrar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btcadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
         btcadastrar.setText("Cadastrar");
         btcadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -371,6 +372,7 @@ public class CadastrarCliente extends javax.swing.JDialog {
             }
         });
 
+        btlimpar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btlimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/limpar.png"))); // NOI18N
         btlimpar.setText("Limpar");
         btlimpar.setMaximumSize(new java.awt.Dimension(117, 41));
@@ -381,6 +383,7 @@ public class CadastrarCliente extends javax.swing.JDialog {
             }
         });
 
+        Sair.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Sair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair.png"))); // NOI18N
         Sair.setText("Sair");
         Sair.setMaximumSize(new java.awt.Dimension(117, 41));
