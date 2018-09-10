@@ -105,6 +105,9 @@
                 <Property name="text" type="java.lang.String" value="Pesquisar Animais"/>
                 <Property name="toolTipText" type="java.lang.String" value="Pesquisar Animais"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmipesquisaranimaisActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmipesquisarmarcacoes">
               <Properties>

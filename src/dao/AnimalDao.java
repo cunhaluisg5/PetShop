@@ -7,7 +7,10 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import jdbc.ConectionFactory;
 import model.Animal;
 
@@ -38,6 +41,32 @@ public class AnimalDao {
             
             stmt.execute();
             stmt.close();
+        }catch(SQLException erro){
+            throw new RuntimeException(erro);
+        }
+    }
+    
+    public List<Animal> listarAnimais(){
+        try{
+            String sql = "select * from animal";
+            PreparedStatement stmt = conecta.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            List<Animal> lista = new ArrayList<Animal>();
+            
+            while(rs.next()){
+                Animal animal = new Animal();
+                animal.setId(rs.getInt("id"));
+                animal.setNome(rs.getString("nome"));
+                animal.setIdade(rs.getInt("idade"));
+                animal.setEspecie(rs.getString("especie"));
+                animal.setRaca(rs.getString("raca"));
+                animal.setSexo(rs.getString("sexo"));
+                animal.setDataNascimento(rs.getDate("dataNascimento"));
+                animal.setPelagem(rs.getString("pelagem"));
+                animal.setObservacao(rs.getString("observacao"));
+                lista.add(animal);
+            }
+            return lista;
         }catch(SQLException erro){
             throw new RuntimeException(erro);
         }

@@ -5,7 +5,11 @@
  */
 package GUI;
 
+import dao.AnimalDao;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Animal;
 
 /**
  *
@@ -13,9 +17,9 @@ import javax.swing.JOptionPane;
  */
 public class PesquisarAnimais extends javax.swing.JDialog {
 
-    /**
-     * Creates new form PesquisarAnimais
-     */
+    AnimalDao dao;
+    DefaultTableModel model;
+    
     public PesquisarAnimais(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -31,24 +35,29 @@ public class PesquisarAnimais extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lbcabecalho = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tbinfo = new javax.swing.JTable();
+        btsair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisar Animais");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Animais Cadastrados");
-        jLabel1.setMaximumSize(new java.awt.Dimension(249, 29));
-        jLabel1.setPreferredSize(new java.awt.Dimension(249, 29));
+        lbcabecalho.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lbcabecalho.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbcabecalho.setText("Animais Cadastrados");
+        lbcabecalho.setMaximumSize(new java.awt.Dimension(249, 29));
+        lbcabecalho.setPreferredSize(new java.awt.Dimension(249, 29));
 
         jScrollPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbinfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
             },
@@ -64,23 +73,23 @@ public class PesquisarAnimais extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        tbinfo.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tbinfo);
+        if (tbinfo.getColumnModel().getColumnCount() > 0) {
+            tbinfo.getColumnModel().getColumn(0).setResizable(false);
+            tbinfo.getColumnModel().getColumn(1).setResizable(false);
+            tbinfo.getColumnModel().getColumn(2).setResizable(false);
+            tbinfo.getColumnModel().getColumn(3).setResizable(false);
+            tbinfo.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair.png"))); // NOI18N
-        jButton1.setText("Sair");
-        jButton1.setMaximumSize(new java.awt.Dimension(117, 41));
-        jButton1.setPreferredSize(new java.awt.Dimension(117, 41));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btsair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/sair.png"))); // NOI18N
+        btsair.setText("Sair");
+        btsair.setMaximumSize(new java.awt.Dimension(117, 41));
+        btsair.setPreferredSize(new java.awt.Dimension(117, 41));
+        btsair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btsairActionPerformed(evt);
             }
         });
 
@@ -92,12 +101,12 @@ public class PesquisarAnimais extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbcabecalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btsair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(18, Short.MAX_VALUE))))
         );
@@ -105,23 +114,44 @@ public class PesquisarAnimais extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbcabecalho, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btsair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsairActionPerformed
         int recebe = JOptionPane.showConfirmDialog(null, "Deseja realmente sair da tela de pesquisa?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(recebe == JOptionPane.YES_OPTION){
             this.dispose();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btsairActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        try{
+            dao = new AnimalDao();
+            List<Animal> lista = dao.listarAnimais();
+            model = (DefaultTableModel) tbinfo.getModel();
+            model.setNumRows(0);
+            
+            for(Animal a : lista){
+                model.addRow(new Object[]{
+                a.getNome(),
+                a.getIdade(),
+                a.getEspecie(),
+                a.getRaca(),
+                a.getSexo()
+                });
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao listar os animais!", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -166,9 +196,9 @@ public class PesquisarAnimais extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btsair;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lbcabecalho;
+    private javax.swing.JTable tbinfo;
     // End of variables declaration//GEN-END:variables
 }

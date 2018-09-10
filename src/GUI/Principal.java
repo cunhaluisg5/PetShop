@@ -203,6 +203,11 @@ public class Principal extends javax.swing.JFrame {
         jmipesquisaranimais.setMnemonic('a');
         jmipesquisaranimais.setText("Pesquisar Animais");
         jmipesquisaranimais.setToolTipText("Pesquisar Animais");
+        jmipesquisaranimais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmipesquisaranimaisActionPerformed(evt);
+            }
+        });
         jmpesquisa.add(jmipesquisaranimais);
 
         jmipesquisarmarcacoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/marcar horário.png"))); // NOI18N
@@ -236,7 +241,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmicadastraranimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmicadastraranimalActionPerformed
-        // TODO add your handling code here:
+        new CadastrarAnimal(null, true).setVisible(true);
     }//GEN-LAST:event_jmicadastraranimalActionPerformed
 
     private void jmimarcarhorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmimarcarhorarioActionPerformed
@@ -250,7 +255,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiinformacoesActionPerformed
 
     private void btcadastraranimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btcadastraranimalActionPerformed
-        // TODO add your handling code here:
+        new CadastrarAnimal(null, true).setVisible(true);
     }//GEN-LAST:event_btcadastraranimalActionPerformed
 
     private void btsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsairActionPerformed
@@ -278,6 +283,10 @@ public class Principal extends javax.swing.JFrame {
     private void jmipesquisarclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmipesquisarclientesActionPerformed
         new PesquisarClientes(null, true).setVisible(true);
     }//GEN-LAST:event_jmipesquisarclientesActionPerformed
+
+    private void jmipesquisaranimaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmipesquisaranimaisActionPerformed
+        new PesquisarAnimais(null, true).setVisible(true);
+    }//GEN-LAST:event_jmipesquisaranimaisActionPerformed
 
     /**
      * @param args the command line arguments
