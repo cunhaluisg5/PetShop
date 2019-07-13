@@ -501,10 +501,7 @@ public class CadastrarCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_cbestadoActionPerformed
 
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
-        int recebe = JOptionPane.showConfirmDialog(null, "Deseja sair da tela de cadastro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if(recebe == JOptionPane.YES_OPTION){
-            this.dispose();;
-        }
+        this.dispose();
     }//GEN-LAST:event_SairActionPerformed
 
     private void btlimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btlimparActionPerformed

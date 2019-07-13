@@ -327,10 +327,7 @@ public class MarcarHorario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsairActionPerformed
-        int recebe = JOptionPane.showConfirmDialog(null, "Deseja realmente sair da tela de marcação?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if(recebe == JOptionPane.YES_OPTION){
-            this.dispose();
-        }
+        this.dispose();
     }//GEN-LAST:event_btsairActionPerformed
 
     private void btbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbuscarActionPerformed

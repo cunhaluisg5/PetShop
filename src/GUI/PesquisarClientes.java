@@ -144,10 +144,7 @@ public class PesquisarClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void btsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsairActionPerformed
-        int recebe = JOptionPane.showConfirmDialog(null, "Deseja realmente sair da tela de pesquisa?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if(recebe == JOptionPane.YES_OPTION){
-            this.dispose();
-        }
+        this.dispose();
     }//GEN-LAST:event_btsairActionPerformed
 
     /**
